@@ -67,6 +67,7 @@ import { EmailBreakPipe } from './email-break.pipe';
 import { ConverterAndCleanSqlToXmlCsvComponent } from './converter-and-clean-sql-to-xml-csv/converter-and-clean-sql-to-xml-csv.component';
 import { ConverterAndCleanSqlToXmlCsvContentComponent } from './converter-and-clean-sql-to-xml-csv-content/converter-and-clean-sql-to-xml-csv-content.component';
 import { SeparatePipe } from './separate.pipe';
+import { BuildDistComponent } from './build-dist/build-dist.component';
 
 @NgModule({
   imports: [
@@ -146,6 +147,7 @@ import { SeparatePipe } from './separate.pipe';
     ConverterAndCleanSqlToXmlCsvComponent,
     ConverterAndCleanSqlToXmlCsvContentComponent,
     SeparatePipe,
+    BuildDistComponent,
   ],
   providers: [
     TratServicesService,
