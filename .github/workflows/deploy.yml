@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -19,9 +20,6 @@ jobs:
 
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
-
-      - name: Audit Fix (Optional)
-        run: npm audit fix || true
 
       - name: Build Project
         run: npm run build --prod
