@@ -1,0 +1,234 @@
+{
+  "data": [
+    {
+      "0": {
+        "position": "Id",
+        "type": "Marc",
+        "mappingSyracus": "001",
+        "subfield": "$b"
+      },
+      "1": {
+        "position": "idcateg",
+        "type": "Marc",
+        "mappingSyracus": "001",
+        "subfield": "$b"
+      },
+      "2": {
+        "position": "cod",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "3": {
+        "position": "niv",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "4": {
+        "position": "num",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "5": {
+        "position": "numeb",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "6": {
+        "position": "numess",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "7": {
+        "position": "numta3",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "8": {
+        "position": "cer",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "9": {
+        "position": "cereb",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "10": {
+        "position": "dateent",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "11": {
+        "position": "darefin",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "12": {
+        "position": "nat",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "13": {
+        "position": "sujet1",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "14": {
+        "position": "sujet3",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "15": {
+        "position": "req",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "16": {
+        "position": "def",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "17": {
+        "position": "moukarir",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "18": {
+        "position": "dateihalamoukarir",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "19": {
+        "position": "mandoub",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "20": {
+        "position": "dateihalamandoub",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "21": {
+        "position": "maal",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "22": {
+        "position": "mabda",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "23": {
+        "position": "mabdaimportant",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "24": {
+        "position": "cle",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "25": {
+        "position": "cause",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "26": {
+        "position": "avoca",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "27": {
+        "position": "hok",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "28": {
+        "position": "source",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "29": {
+        "position": "dateap",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "30": {
+        "position": "taw",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "31": {
+        "position": "taw1",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "32": {
+        "position": "lien1",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "33": {
+        "position": "lien2",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "34": {
+        "position": "lien11",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "35": {
+        "position": "liennotes",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "36": {
+        "position": "liennotesg",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "37": {
+        "position": "txt",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "38": {
+        "position": "majalla",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "39": {
+        "position": "fasslmajalla",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "40": {
+        "position": "dateinsertiondb",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "41": {
+        "position": "addedby",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "42": {
+        "position": "pub",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "43": {
+        "position": "datemodification",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "44": {
+        "position": "modifiedby",
+        "type": "",
+        "mappingSyracus": ""
+      },
+      "id": "6418"
+    }
+  ]
+}

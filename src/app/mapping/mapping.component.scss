@@ -1,0 +1,30 @@
+.attribute-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adjust spacing as needed */
+}
+
+.attribute-item {
+  display: flex;
+  align-items: center;
+}
+.card-body
+{
+   height: 470px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 150px;
+  margin-right: 0.3rem;
+}
+
+.logo h4 {
+  font-size: 1.1rem;
+  margin-top: -9px;
+  letter-spacing: -0.5px;
+  color: #151111;
+}

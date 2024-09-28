@@ -1,0 +1,92 @@
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+          <form>
+            <mat-form-field>
+              <mat-label>Select your project</mat-label>
+              <select matNativeControl [(ngModel)]="selectedProject" required>
+                <option *ngFor="let project of projectsTable">{{ project.nom }}</option>
+              </select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Select output format</mat-label>
+              <select matNativeControl [(ngModel)]="selectedFormat" required>
+                <option value="xml">XML</option>
+                <option value="csv">CSV</option>
+              </select>
+            </mat-form-field>
+
+            <div *ngIf="selectedFormat === 'xml' && selectedProject === 'trat'">
+              <div class="form-group">
+                <label for="outputPath">Output Path:</label>
+                <input id="outputPath" type="text" [(ngModel)]="outputPath" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label>Selected Attributes:</label>
+                <div class="attribute-checkboxes">
+                  <div *ngFor="let attribute of jugementAttributes" class="attribute-item">
+                    <input type="checkbox" [checked]="isSelected(attribute)" (change)="toggleAttribute(attribute)" />
+                    <span>{{ attribute }}</span>
+                  </div>
+                </div>
+                <div class="button-group">
+                  <button type="button" class="btn btn-secondary" (click)="selectAllAttributes()">Cocher tous</button>
+                  <button type="button" class="btn btn-secondary" (click)="resetAttributes()">Réinitialiser</button>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" (click)="generateXml()">Generate XML</button>
+              <button class="btn btn-secondary" (click)="openMapping()">Generate Pipelines</button>
+
+            </div>
+          </form>
+
+          <div *ngIf="selectedFormat === 'xml' && selectedProject !== 'trat'">
+            <p>No data available.</p>
+          </div>
+          <div *ngIf="selectedFormat === 'csv' && selectedProject !== 'trat'">
+            <p>No data available.</p>
+          </div>
+
+          <div *ngIf="selectedFormat === 'csv' && selectedProject === 'trat'">
+            <form [formGroup]="csvForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="outputPathCsv">CSV Output Path:</label>
+                <input type="text" id="outputPathCsv" formControlName="outputPathCsv" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label for="delimiter">CSV Delimiter:</label>
+                <input type="text" id="delimiter" formControlName="delimiter" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label>Selected Attributes:</label>
+                <div class="attribute-checkboxes">
+                  <div *ngFor="let attribute of jugementAttributes" class="attribute-item">
+                    <input type="checkbox" [checked]="isSelected(attribute)" (change)="toggleAttribute(attribute)" />
+                    <span>{{ attribute }}</span>
+                  </div>
+                </div>
+                <div class="button-group">
+                  <button type="button" class="btn btn-secondary" (click)="selectAllAttributes()">Cocher tous</button>
+                  <button type="button" class="btn btn-secondary" (click)="resetAttributes()">Réinitialiser</button>
+                </div>
+              </div>
+
+
+              <button class="btn btn-primary" (click)="generateXml()">Generate CSV</button>
+              <button class="btn btn-secondary" (click)="openMapping()">Generate Pipelines</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

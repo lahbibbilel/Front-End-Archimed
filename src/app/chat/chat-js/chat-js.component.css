@@ -1,0 +1,37 @@
+/* chat.component.css */
+
+.chat-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.chat-message {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.user-message {
+  background-color: #b3e0ff;
+  align-self: flex-end;
+}
+
+.bot-message {
+  background-color: #ffffff;
+  align-self: flex-start;
+}
+
+.message-text {
+  margin: 0;
+}
+
+.message-time {
+  font-size: 0.8em;
+  color: #666;
+}
+
+main.msger-chat {
+  height: 80vh;
+  overflow-y: auto;
+}

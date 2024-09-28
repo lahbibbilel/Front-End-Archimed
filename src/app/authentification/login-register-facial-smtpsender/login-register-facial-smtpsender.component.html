@@ -1,0 +1,155 @@
+<main>
+  <div class="box">
+    <div class="inner-box">
+      <div class="forms-wrap">
+        <!-- Sign In Form -->
+        <form (ngSubmit)="login()" autocomplete="off" class="sign-in-form" *ngIf="!showRegister && !showFacial">
+          <div class="logo">
+            <img src="assets/archimed2.png" alt="Archimed" />
+
+          </div>
+          <div class="heading">
+            <h2>Welcome Back</h2>
+          <!--  <h6>Not registered yet?</h6>
+            <a class="toggle" (click)="toggleForm()">Sign up</a>
+           --> <br>
+            <h6>Already have an account?</h6>
+            <a class="toggle" (click)="toggleFacial()">face Sign in</a>
+          </div>
+          <div class="actual-form">
+            <div class="input-wrap">
+              <input type="text" [(ngModel)]="credentials.email" name="email" minlength="4" class="input-field" autocomplete="off" required placeholder="email"/>
+            </div>
+            <div class="input-wrap">
+              <input
+                [type]="passwordFieldType"
+                [(ngModel)]="credentials.password"
+                name="password"
+                minlength="4"
+                class="input-field"
+                autocomplete="off"
+                required
+                placeholder="Password"
+              />
+              <i
+                class="fas"
+                [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"
+                (click)="togglePasswordVisibility()"
+              ></i>
+            </div>
+
+
+
+            <input type="submit" value="Sign-In" class="sign-btn" />
+<!--            <input type="submit" value="sign-up" (click)="toggleForm()" class="sign-up" />
+   -->
+            <input type="submit" value="face-Sign-in" (click)="toggleFacial()" class="sign-up" />
+
+            <p class="text">
+              Forgotten your password or your login details?
+              <a href="#">Get help</a> signing in
+            </p>
+          </div>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form (ngSubmit)="signUp()" autocomplete="off" class="sign-up-form" *ngIf="showRegister && !showFacial">
+          <div class="logo">
+            <img src="assets/archimed2.png" alt="Archimed" />
+          </div>
+          <div class="heading">
+            <h6>Already have an account?</h6>
+            <a class="toggle" (click)="toggleForm()">Sign in</a>
+
+          </div>
+
+          <div class="actual-form">
+            <div class="input-wrap">
+              <input type="text" [(ngModel)]="user.name" name="name" minlength="4" class="input-field" autocomplete="off" required placeholder="Name"/>
+            </div>
+            <div class="input-wrap">
+              <input type="text" [(ngModel)]="user.username" name="username" minlength="4" class="input-field" autocomplete="off" required placeholder="Username"/>
+            </div>
+            <div class="input-wrap">
+              <input type="text" [(ngModel)]="user.lastname" name="lastname" minlength="4" class="input-field" autocomplete="off" required placeholder="Lastname"/>
+            </div>
+            <div class="input-wrap">
+              <input type="email" [(ngModel)]="user.email" name="email" class="input-field" autocomplete="off" required placeholder="Email"/>
+            </div>
+            <div class="input-wrap">
+              <input type="password" [(ngModel)]="user.password" name="password" minlength="4" class="input-field" autocomplete="off" required placeholder="Password"/>
+            </div>
+            <input type="submit" value="Sign Up" class="sign-btn" />
+            <input type="submit" value="sign-up" (click)="toggleForm()" class="sign-up" />
+
+            <p class="text">
+              By signing up, I agree to the
+              <a href="#">Terms of Services</a> and
+              <a href="#">Privacy Policy</a>
+            </p>
+          </div>
+        </form>
+
+        <!-- Sign In with Facial Form -->
+        <form  autocomplete="off"  *ngIf="showFacial">
+
+
+          <div class="margin">
+            <div class="heading">
+            <!--  <h6 >Not registered yet?</h6>
+
+              <a  routerLink="/auth" class="toggle"><span>Sign up</span></a>
+-->
+            </div>
+
+
+
+
+            <app-template-facial></app-template-facial>
+            <br>
+        <!--    <div class="zindex">-!-->
+            <p class="fixer">
+              <input type="submit" value="Your Face" class="sign-btn" (click)="toggleHello()" />
+            <!--  <input type="submit" value="sign-up" (click)="toggleForm()" class="sign-up" />-->
+              <input type="submit" value="back" [routerLink]="'/auth'"  class="sign-up" />
+            </p>
+
+          </div>
+       <!--   </div>-!-->
+
+        </form>
+
+        <form autocomplete="off" class="facial"  *ngIf="showHello">
+          <div >
+            <app-face-login ></app-face-login>
+          </div></form>
+
+        </div>
+
+      <div class="carousel">
+        <div class="images-wrapper">
+          <img src="assets/newback.png" class="image img-1 show" alt="" />
+          <img src="assets/newback.png" class="image img-2 show" alt="" />
+          <img src="assets/newback.png" class="image img-3 show" alt="" />
+
+        </div>
+        <div class="text-slider">
+          <div class="text-wrap">
+            <div class="text-group">
+              <h2 class="fixertxt">Our company welcomes you</h2>
+              <h2 class="fixertxt">Archimed</h2>
+              <h2 style="font-size: 30px; color: white;">MEA 😊</h2>
+            </div>
+          </div>
+          <div class="bullets">
+            <span class="active" data-value="1" (click)="moveSlider($event)"></span>
+            <span data-value="2" (click)="moveSlider($event)"></span>
+            <span data-value="3" (click)="moveSlider($event)"></span>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</main>

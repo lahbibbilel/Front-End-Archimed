@@ -1,0 +1,52 @@
+<mat-form-field appearance="fill">
+  <mat-label>Select dataflow format</mat-label>
+  <select matNativeControl [(ngModel)]="selectedFormat" required>
+    <option value="sql">sql</option>
+  </select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Select your project</mat-label>
+  <select matNativeControl [(ngModel)]="selectedProject" (ngModelChange)="onProjectChange()" required>
+    <option *ngFor="let project of projectsTable" [value]="project.nom">{{ project.nom }}</option>
+  </select>
+</mat-form-field>
+
+<div>
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Convert SQL to CSV</ng-template>
+      <form [formGroup]="firstFormGroup" >
+        <mat-form-field appearance="fill" style="width: 35%;">
+          <input matInput formControlName="csvPathCtrl" placeholder="CSV Output File Path" [attr.disabled]="selectedProject === 'trat' ? true : null">
+        </mat-form-field>
+        <div>
+          <button class="btn btn-primary"  matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>Convert SQL to XML</ng-template>
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field appearance="fill" style="width: 35%;">
+          <input matInput formControlName="xmlPathCtrl" placeholder="XML Output File Path" [attr.disabled]="selectedProject === 'trat' ? true : null">
+        </mat-form-field>
+
+        <div>
+          <button   class="btn btn-secondary"  matStepperPrevious>Back</button>
+          <button class="btn btn-primary" (click)="onSubmit()" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid">Convert</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Completed</ng-template>
+      <p>You have completed the conversion process.</p>
+      <div>
+        <button  class="btn btn-secondary"  matStepperPrevious>Back</button>
+        <button  class="btn btn-primary" (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

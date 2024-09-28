@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .chat-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #0084ff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000; /* Assurez-vous que le bouton de chat est au-dessus */
+    }
+
+    .chat-box {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 80%;
+      max-width: 500px;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      z-index: 1000; /* Assurez-vous que la boîte de chat est au-dessus */
+    }
+
+    .chat-box.visible {
+      display: block;
+    }
+
+    .chat-header {
+      background-color: #0084ff;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="sidebar" data-color="red">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="main-panel">
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+
+    <!-- Bouton de chat flottant -->
+    <button class="chat-button" type="button" (click)="toggleChatBox()">💬</button>
+    <div [ngClass]="{'chat-box': true, 'visible': isChatBoxVisible}">
+      <app-testing></app-testing>
+    </div>
+  </div>
+</div>
+</body>
+</html>

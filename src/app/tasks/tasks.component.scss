@@ -1,0 +1,58 @@
+.status-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.auxiliar-low {
+  background-color: #2196F3; /* Bleu pour 'En Cours' */
+}
+
+.auxiliar-medium {
+  background-color: #4CAF50; /* Vert pour 'Terminé' */
+}
+
+.status-tag__txt {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.highlight {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.highlight.auxiliar-low {
+  background-color: #2196F3;
+}
+
+.highlight.auxiliar-medium {
+  background-color: #4CAF50;
+}
+
+.highlight[style*="--iteration-count: infinite;"] {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(33, 150, 243, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+  }
+}

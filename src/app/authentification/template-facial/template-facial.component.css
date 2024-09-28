@@ -1,0 +1,207 @@
+* {
+  margin: 0px;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Consolas, monospace;
+  margin-top:5px;
+}
+
+body[_ngcontent-rnd-c146] {
+  /* display: flex; */
+  /* justify-content: center; */
+  align-items: center;
+  /* min-height: 100vh; */
+  /* background: #ff8c6b; */
+  margin-left: -160px;
+  margin-top: 8px;
+}
+
+
+.scan {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  animation: animateColor 2s linear infinite;
+}
+
+@keyframes animateColor {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.scan .face {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  background-image: url('assets/face_02.png');
+  background-size: 500px;
+  animation: animate 4s ease-in-out infinite;
+}
+
+.scan .face::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('assets/face_01.png');
+  background-size: 500px;
+  animation: animate 4s ease-in-out infinite;
+}
+
+@keyframes animate {
+  0%, 100% {
+    height: 0;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+.scan .face::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  filter: drop-shadow(0 0 20px #3fefef) drop-shadow(0 0 60px #3fefef);
+  animation: animate_line 4s ease-in-out infinite;
+}
+
+@keyframes animate_line {
+  0%, 100% {
+    top: 0;
+  }
+  50% {
+    top: 100%;
+  }
+}
+
+.scan h3 {
+  text-transform: uppercase;
+  color: #3fefef;
+  font-size: 2em;
+  margin-left:120px;
+  margin-top: 450px;
+  letter-spacing: 2px;
+  filter: drop-shadow(0 0 20px #3fefef) drop-shadow(0 0 60px #3fefef);
+  animation: animate_text 0.5s steps(1) infinite;
+}
+
+.sign-btn {
+  display: inline-block;
+  width: 100%;
+  height: 43px;
+  background-color: #151111;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.8rem;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+  margin-left: 143px;
+  transition: 0.3s;
+}
+
+.sign-btn:hover {
+  background-color: #8371fd;
+}
+
+
+
+@keyframes animate_text {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.scan .face .dots {
+  position: absolute;
+  inset: 0;
+  margin-top: 5px;
+
+}
+
+.scan .face .dots::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  /* background: url("src/assets/lines.png");*/
+  background-size: 500px;
+  animation: face_lines 4s ease-in-out infinite;
+}
+
+
+.toggle {
+  color: #151111;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.toggle:hover {
+  color: #8371fd;
+}
+
+.heading h6 {
+  color: #bababa;
+  font-weight: 400;
+  font-size: 0.75rem;
+  display: inline;
+}
+
+
+
+@keyframes face_lines {
+  0%, 25%, 100% {
+    height: 0;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+.scan .face .dots::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  background: url('assets/fa2.png');
+  background-size: 500px;
+  animation: face_points 4s ease-in-out infinite;
+}
+
+@keyframes face_points {
+  0%, 100% {
+    height: 0;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+.zindex {
+  position: absolute;
+
+  z-index: 1;
+}
+
+.zindex .sign-btn {
+  animation: none; /* Désactiver l'animation sur les boutons */
+}

@@ -1,0 +1,153 @@
+<mat-form-field appearance="fill">
+  <mat-label>Select output format</mat-label>
+  <select matNativeControl [(ngModel)]="selectedFormat" required>
+    <option value=".docs">.docs</option>
+    <option value="sql">sql</option>
+  </select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Select your project</mat-label>
+  <select matNativeControl required>
+    <option *ngFor="let project of projectsTable">{{ project.nom }}</option>
+  </select>
+</mat-form-field>
+
+<div *ngIf="!showCarousel && selectedFormat === '.docs'">
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Convertir .docx en .txt</ng-template>
+      <form (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <input matInput [(ngModel)]="input" id="inp" placeholder="Chemin du fichier .docx">
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext *ngIf="conversionSuccess">Next</button>
+          <button mat-button type="submit">Convertir</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>File Processing</ng-template>
+      <div class="container">
+        <mat-form-field appearance="fill">
+          <input matInput [(ngModel)]="inputFilePath" placeholder="Input File Path">
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="processFiles()" class="btn btn-primary" [disabled]="!conversionSuccess">Process Files</button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="generateNotices()">Generate Notices</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>
+
+
+
+
+<div *ngIf="!showCarousel && selectedFormat === 'sql'">
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Convert Sql to Notices</ng-template>
+      <form (ngSubmit)="generateSql()">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter SQL Table Name</mat-label>
+          <input matInput [(ngModel)]="sqlTableName" placeholder="SQL Table Name" required>
+              </mat-form-field>
+        <div>
+          <button mat-button matStepperNext *ngIf="sqlSuccess">Next</button>
+          <button mat-button type="submit">Convertir</button>
+        </div>
+      </form>
+    </mat-step>
+
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="generateNotices()">Generate Notices</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>
+
+<ng-template #carouselTemplate [ngIf]="generateNotice">
+  <div id="template-mo-jassa-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+      <li *ngFor="let notice of notices; let i = index" data-bs-target="#template-mo-jassa-hero-carousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div *ngFor="let notice of notices; let i = index" class="carousel-item" [class.active]="i === 0">
+        <div class="container">
+          <div class="row p-5">
+            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+              <img class="img-fluid" src="assets/trat.jpg" alt="">
+            </div>
+            <div class="col-lg-6 mb-0 d-flex align-items-center">
+              <div class="text-align-left align-self-center">
+                <h1 class="h1 text-success"><b>{{ notice.decision }}</b></h1>
+                <h3 class="h2">{{ notice.decision_maker }}</h3>
+                <h3 class="h2">{{ notice.subject }}</h3>
+                <div class="decision-content">
+                  <p>{{ notice.principe }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-jassa-hero-carousel" role="button" data-bs-slide="prev">
+      <i class="fas fa-chevron-left"></i>
+    </a>
+    <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-jassa-hero-carousel" role="button" data-bs-slide="next">
+      <i class="fas fa-chevron-right"></i>
+    </a>
+    <button mat-button class="back-button" (click)="goBackToStepper()">Back to Steps</button>
+  </div>
+</ng-template>
+
+
+
+<!-- ici -->
+<div *ngIf="jugements.length > 0">
+  <table>
+    <!-- Table Headers -->
+    <tr>
+      <th>ID</th>
+      <th>Code</th>
+      <!-- Add other headers as needed -->
+    </tr>
+    <!-- Table Rows -->
+    <tr *ngFor="let jugement of jugements">
+      <td>{{ jugement.id }}</td>
+      <td>{{ jugement.cod }}</td>
+      <!-- Add other data cells as needed -->
+    </tr>
+  </table>
+
+  <!-- Pagination Controls -->
+  <div>
+    <button (click)="onPageChange(pageNumber - 1)" [disabled]="pageNumber === 1">Previous</button>
+    <span>Page {{ pageNumber }}</span>
+    <button (click)="onPageChange(pageNumber + 1)" [disabled]="pageNumber * pageSize >= totalItems">Next</button>
+  </div>
+</div>
+<div *ngIf="jugements.length === 0">
+  <p>No data available.</p>
+</div>
+

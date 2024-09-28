@@ -1,0 +1,135 @@
+:root {
+  --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --msger-bg: #fff;
+  --border: 2px solid #ddd;
+  --left-msg-bg: #ececec;
+  --right-msg-bg: #579ffb;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animated-dots::after {
+  content: '...';
+  animation: blink 1s infinite;
+}
+
+
+
+body {
+  @apply flex justify-center items-center bg-gradient-to-r from-[#f5f7fa] to-[#c3cfe2];
+  font-family: Helvetica, sans-serif;
+}
+
+.msger-header {
+  @apply flex justify-between p-2 border-b border-[#ddd] bg-[#eee] text-[#666];
+}
+
+.msger-container {
+  @apply flex justify-center items-center;
+}
+
+.msger {
+  @apply max-w-full w-full border border-[#ccc] rounded-lg;
+}
+
+main.msger-chat {
+  @apply h-[50vh] overflow-y-auto bg-[#ffffff];
+}
+
+.msger-chat {
+  @apply flex-1 overflow-y-auto p-2;
+}
+
+.msger-chat::-webkit-scrollbar {
+  width: 6px;
+}
+
+.msger-chat::-webkit-scrollbar-track {
+  background: #ddd;
+}
+
+.msger-chat::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+}
+
+.msg {
+  @apply flex items-end mb-2;
+}
+
+.msg:last-of-type {
+  @apply mb-0;
+}
+
+.msg-img {
+  @apply w-12 h-12 mr-2 bg-[#ddd] bg-no-repeat bg-center bg-cover rounded-full;
+}
+
+.msg-bubble {
+  @apply max-w-[450px] p-4 rounded-lg;
+  background-color: var(--left-msg-bg);
+}
+
+.msg-info {
+  @apply flex justify-between items-center mb-2;
+}
+
+.msg-info-name {
+  @apply mr-2 font-bold;
+}
+
+.msg-info-time {
+  @apply text-xs;
+}
+
+.left-msg .msg-bubble {
+  @apply rounded-bl-none;
+}
+
+.right-msg {
+  @apply flex-row-reverse;
+}
+
+.right-msg .msg-bubble {
+  @apply bg-[#579ffb] text-[#000000] rounded-br-none;
+}
+
+.right-msg .msg-img {
+  @apply mr-2;
+}
+
+.msger-inputarea {
+  @apply flex p-2 border-t border-[#ddd] bg-[#eee];
+}
+
+.msger-inputarea * {
+  @apply p-2 border-none rounded-md text-base;
+}
+
+.msger-input {
+  @apply flex-1 bg-[#ddd];
+}
+
+.msger-send-btn {
+  @apply ml-2 bg-green-500 text-white font-bold cursor-pointer transition-colors duration-300;
+}
+
+.msger-send-btn:hover {
+  @apply bg-green-600;
+}
+
+.custom-select {
+  @apply bg-[#eee] border-[#eee] p-1 w-full box-border;
+}
+.msger-chat {
+  scroll-behavior: smooth;
+}

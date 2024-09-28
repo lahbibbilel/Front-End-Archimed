@@ -1,0 +1,118 @@
+
+
+<!-- Close Top Nav -->
+
+
+<nav class="navbar navbar-expand-lg navbar-light shadow">
+  <div class="container d-flex justify-content-between align-items-center">
+
+    <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776;</span>
+    <a class="navbar-brand" href="#"><img src="assets/archimed.jpg" class="img" alt="Logo"></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+
+
+    <div class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+      <div class="flex-fill">
+        <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home"><i class="fa-solid fa-house"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/testing"><i class="fa-solid fa-desktop"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/auth"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+          </li>
+
+          <li class="nav-item">
+
+          <a class="nav-link" routerLink="/chating"><i class='far fa-comment'></i></a>
+
+          </li>
+
+
+          <li class="nav-item dropdown" (click)="toggleDropdown()">
+            <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" aria-expanded="false">
+              <i data-fa-symbol="user" class="fa-solid fa-user fa-fw"></i>
+                          </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" [ngClass]="{ 'show': isDropdownOpen }">
+
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bell"><div class="notf"><h6>10</h6>
+              </div></i></a>
+              <br>
+              <br>
+              <li *ngIf="ImageAuth">
+                <input type="file" (change)="changeProfilePicture($event)" style="display: none;" #fileInput>
+
+              <label (click)="fileInput.click()">
+                  <img class="user-image" [src]="sanitizer.bypassSecurityTrustUrl('data:image/*;base64,' + ImageAuth)" alt="User Image">
+                </label>
+              </li>
+
+
+
+              <li #myInput><a  class="dropdown-item" href="#">{{EmailAuth}}</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">{{NameAuth}}</a></li>
+
+            </ul>
+          </li>
+
+
+
+
+
+
+
+        </ul>
+      </div>
+      <div class="navbar align-self-center d-flex">
+        <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+          <div class="input-group">
+            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+            <div class="input-group-text">
+              <i class="fa fa-fw fa-search"></i>
+            </div>
+          </div>
+        </div>
+        <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+          <i class="fa fa-fw fa-search text-dark mr-2"></i>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<div id="mySidenav" class="sidenav" [style.width]="sidenavWidth">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a (click)="openMapping()">mapping</a>
+  <a (click)="openCleaner()">cleaner</a>
+
+  <a (click)="showSucc()">Clients</a>
+  <a >Contact</a>
+</div>
+
+<div class="overlay" [style.display]="sidenavWidth === '0' ? 'none' : 'block'" (click)="closeNav()"></div>
+<div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="w-100 pt-1 mb-5 text-right">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form action="" method="get" class="modal-content modal-body border-0 p-0">
+      <div class="input-group mb-2">
+        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+        <button type="submit" class="input-group-text bg-success text-light">
+          <i class="fa fa-fw fa-search text-white"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

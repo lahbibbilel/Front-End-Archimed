@@ -1,0 +1,295 @@
+<div class="panel-header panel-header-sm"></div>
+<div class="main-content">
+  <div class="row">
+    <!-- Projects Section -->
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Projects</h4>
+          <form (submit)="addProject()">
+            <div class="input-group">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Add Project</button>
+              </div>
+            </div>
+          </form>
+          <mat-form-field appearance="fill">
+            <mat-label>Search Projects</mat-label>
+            <input matInput placeholder="Search projects" (input)="searchProjects($any($event.target).value)">
+            <button mat-icon-button *ngIf="searchText" matSuffix (click)="clearSearch()">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </mat-form-field>
+
+        </div>
+        <div class="card-body">
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table">
+              <thead class="card-category">
+              <th >Name</th>
+              <th >Description</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Manager</th>
+              <th>Action</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let project of paginatedProjects">
+                <td>{{ project.nom }}</td>
+                <td>{{ project.description }}</td>
+                <td>{{ project.start_date | date }}</td>
+                <td>{{ project.end_date | date }}</td>
+                <td>{{ getUserNameById(project.users) }}</td>
+                <td>
+                  <button type="button" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" (click)="updateProject(project)">
+                    <i class="now-ui-icons ui-2_settings-90"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" (click)="deleteProject(project)">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            <mat-paginator [length]="totalProjects" [pageSize]="5" (page)="onPageChange($event)"></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h4 class="card-title">Analysis of Needs</h4>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Select your project</mat-label>
+            <select matNativeControl required (change)="onProjectChange($event)">
+              <option *ngFor="let project of projectsTable" [value]="project.nom">
+                {{ project.nom }}
+              </option>
+            </select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Select output format</mat-label>
+            <select matNativeControl [(ngModel)]="selectedFormat" required>
+              <option value="xml" selected>XML</option>
+              <option value="csv">CSV</option>
+            </select>
+          </mat-form-field>
+        </div>
+        <div class="card-body">
+          <div *ngIf="selectedFormat === 'csv'">
+            <form (submit)="CountCsvAttributes()">
+              <div class="input-group mt-3">
+                <input type="text" class="form-control" placeholder="Enter file path" [(ngModel)]="inputFilePathCsvAnalyse" name="inputFilePathCsvAnalyse">
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-primary">Analyze CSV</button>
+                </div>
+              </div>
+            </form>
+            <div class="chat-container">
+              <table class="table mt-3" #content>
+                <thead>
+                <tr>
+                  <th colspan="2" class="card-category">Project Needs Analysis for {{ selectedProject?.['nom'] || 'None Selected' }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr><td>Number of fields </td><td>{{ attributeCountoutput }}</td></tr>
+                <tr><td>Row count </td><td>{{ rowCountoutput }}</td></tr>
+                <tr><td>Names of fields </td><td>{{ csvAttributesoutput }}</td></tr>
+                <tr><td>Fields with similar or null content across all rows </td><td>
+                  {{ nullAttributesoutput }} <br>
+                  {{ similarAttributesoutput }}
+
+                </td></tr>
+
+
+              </table>
+
+              <div *ngIf="mistralResponse" class="chat-message user-message" #contentIACSV>
+                <div class="message-text"><h5 class="card-category">Your AI Analysis:</h5>{{ mistralResponse | json }}</div>
+              </div>
+              <div *ngIf="isLoading" class="loading-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <br>
+              <button (click)="downloadPDF()" [disabled]="!isAnalysisComplete" class="btn btn-primary mt-3">Download PDF</button>
+              <button (click)="resetForm()" [disabled]="!isAnalysisComplete" class="btn btn-secondary mt-3">Reset</button> <!-- Add Reset Button -->
+
+            </div>
+          </div>
+
+          <div *ngIf="selectedFormat === 'xml' || selectedFormat == ''">
+            <form (ngSubmit)="CountXmlAttributes()">
+              <div class="input-group mt-3">
+                <input type="text" class="form-control" placeholder="Enter file path" [(ngModel)]="inputFilePathXmlAnalyse" name="inputFilePathXmlAnalyse">
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-primary">Analyze XML</button>
+                </div>
+              </div>
+            </form>
+            <div class="chat-container" >
+              <table class="table mt-3" #contentXml>
+                <thead>
+                <tr><th colspan="2" class="card-category">Project Analysis for :{{ selectedProject?.['nom'] || 'None Selected' }}</th></tr>
+                </thead>
+                <tbody>
+
+
+                <tr><td>Number of fields </td><td>{{ xmlAttributesoutput }}</td></tr>
+                <tr><td>Row count </td><td>{{ nullAttributesoutputxml }}</td></tr>
+
+                <tr>
+                  <td>Names of fields</td>
+                  <td [innerHTML]="similarAttributesoutputxmlFormatted"></td>
+                </tr>
+
+                <tr>
+                  <td>Fields with similar or null content across all rows </td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let attribute of repeatedAttributes"> {{ attribute.id }} : {{ attribute.value }}</li>
+                    </ul>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div *ngIf="mistralResponseXml" #contentXmlIA class="chat-message user-message" >
+                <div class="message-text"><h5 class="card-category">AI Analysis:</h5>{{ mistralResponseXml | json }}</div>
+              </div>
+
+              <div *ngIf="isLoading" class="loading-dots">
+                <span></span><span></span><span></span>
+              </div> <br>
+              <button (click)="downloadPDFXml()" [disabled]="!isAnalysisComplete" class="btn btn-primary mt-3">Download PDF</button>
+              <button (click)="resetForm()" [disabled]="!isAnalysisComplete" class="btn btn-secondary mt-3">Reset</button> <!-- Add Reset Button -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Tasks and Employees Stats Section -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-tasks">
+          <div class="card-header">
+            <h4 class="card-title">Tasks</h4>
+            <form (submit)="addTask()">
+              <div class="input-group">
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-primary">Add Task</button>
+                </div>
+              </div>
+            </form>
+            <mat-form-field appearance="fill">
+              <mat-label>Search Tasks</mat-label>
+              <input matInput placeholder="Search tasks" [(ngModel)]="searchText" (input)="searchTasks(searchText)">
+              <button mat-icon-button *ngIf="searchText" matSuffix (click)="clearSearch()">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+              <table class="table">
+                <thead class="card-category">
+                <th >Task</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Project</th>
+                <th>User</th>
+                <th>Action</th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let task of paginatedTasks">
+                  <td>{{ task.tasks }}</td>
+                  <td>{{ task.start_task | date }} </td>
+                  <td>{{ task.end_task | date }}</td>
+                  <td>{{ getProjectNameById(task.projects) }}</td>
+                  <td>{{ getUserNameTaskById(task.users) }}</td>
+
+
+                  <td class="td-actions text-right">
+                    <button type="button" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" (click)="updateTask(task)">
+                      <i class="now-ui-icons ui-2_settings-90"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" (click)="confirmDelete(task)">
+                      <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer">
+              <mat-paginator [length]="totalTasks" [pageSize]="5" (page)="onPageChangeTasks($event)"></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Employees  Section -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Users</h4>
+            <form (submit)="addUser()">
+              <div class="input-group">
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-primary">Add User</button>
+                  <button type="button" class="btn btn-secondary" (click)="addUserWithFace()">Add User with Face</button>
+
+                </div>
+              </div>
+            </form>
+            <mat-form-field appearance="fill">
+                <mat-label>Search Users</mat-label>
+                <input matInput placeholder="Search users" (input)="searchUsers($any($event.target).value)">
+              <button mat-icon-button *ngIf="searchText" matSuffix (click)="clearSearch()">
+                <mat-icon>clear</mat-icon>
+              </button>
+              </mat-form-field>
+
+          </div>
+          <div class="card-body">
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                <table class="table">
+                  <thead class="card-category">
+                  <th>Username</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Actions</th>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let employee of employeesTable">
+                    <td>{{ employee.username }}</td>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.lastname }}</td>
+                    <td [innerHTML]="employee.email | emailBreak"></td>
+                    <td>{{ employee.role }}</td>
+                    <td>
+                      <button type="button" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" (click)="editUser(employee)">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                      </button>
+                      <button type="button" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" (click)="deleteUser(employee)">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer">
+              <mat-paginator [length]="totalUsers" [pageSize]="5" (page)="onPageChangeUsers($event)"></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

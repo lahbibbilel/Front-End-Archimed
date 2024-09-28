@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-wrapper">
+      <div class="navbar-toggle">
+        <button type="button" class="navbar-toggler" >
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </button>
+      </div>
+      <a class="navbar-brand" href="#">welcome {{NameAuth}}</a>
+    </div>
+    <button class="navbar-toggler" type="button" (click)="collapse()"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
+      <form>
+        <div class="input-group no-border">
+          <div class="input-group-append">
+
+          </div>
+        </div>
+      </form>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+        </li>
+        <div class="sp">
+        <li class="nav-item">
+          <a class="nav-l" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            logout
+          </a>
+        </li>
+          </div>
+        <li class="nav-item" *ngIf="ImageAuth">
+          <input type="file" (change)="changeProfilePicture($event)" style="display: none;" #fileInput>
+          <label class="nav-link" (click)="fileInput.click()" style="cursor: pointer;">
+            <img *ngIf="ImageAuth" class="user-image" [src]="sanitizer.bypassSecurityTrustUrl('data:image/*;base64,' + ImageAuth)" alt="User Image"/>
+            <p>
+              <span class="d-lg-none d-md-block">Account</span>
+            </p>
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

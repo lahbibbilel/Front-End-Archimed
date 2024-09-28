@@ -1,0 +1,22 @@
+
+.decision-content {
+  max-height: 100px; /* Taille maximale de la zone de contenu */
+  overflow-y: auto; /* Activation du défilement vertical si le contenu dépasse la hauteur maximale */
+}
+#template-mo-jassa-hero-carousel .carousel-control-next i, #template-mo-jassa-hero-carousel .carousel-control-prev i {
+  color: #59ab6e !important;
+  font-size: 2.8em !important;
+  padding-top: 50px;
+}
+.carousel-inner
+{
+  background-color: white;
+  margin-left:100px
+}
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}

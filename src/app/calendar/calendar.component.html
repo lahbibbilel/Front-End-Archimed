@@ -1,0 +1,19 @@
+<div class="card-body">
+  <full-calendar [options]="calendarOptions">
+    <ng-template #eventContent let-arg>
+      <div class="event-content">
+        <b>{{ arg.timeText }}</b>
+        <i>{{ arg.event.title }}</i>
+        <button class="btn btn-danger" *ngIf="canMarkAsFinished(arg.event)" (click)="markTaskAsFinished(arg.event.id)">
+          <i class="now-ui-icons gestures_tap-01">You want to terminate this task?</i>
+        </button>
+        <button class="btn btn-info" (click)="showTaskDetails(arg.event)">
+          <i class="now-ui-icons ui-1_zoom-bold">View Details</i>
+        </button>
+        <span *ngIf="arg.event!.extendedProps.isFinished">
+          Terminée on {{ arg.dateFinished }}
+        </span>
+      </div>
+    </ng-template>
+  </full-calendar>
+</div>

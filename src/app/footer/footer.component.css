@@ -1,0 +1,18 @@
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background-color: #000000 !important;
+  position: relative; /* Assurez-vous que l'élément est positionné pour que le z-index fonctionne */
+  z-index: 9000; /* Vous pouvez ajuster la valeur en fonction de vos besoins */
+}
+
+.bg-black {
+  --bs-bg-opacity: 1;
+  background-color: #000000 !important;
+  position: relative; /* Assurez-vous que l'élément est positionné pour que le z-index fonctionne */
+  z-index: 9000; /* Vous pouvez ajuster la valeur en fonction de vos besoins */
+}
+
+.footer {
+  position: relative;
+  z-index: 9000; /* Vous pouvez ajuster la valeur en fonction de vos besoins */
+}

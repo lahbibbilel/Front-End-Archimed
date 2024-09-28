@@ -1,0 +1,17 @@
+<!-- chat.component.html -->
+
+<div class="chat-container">
+  <h1>Chat</h1>
+  <div class="chat-message user-message" *ngFor="let msg of messages">
+    <p class="message-text">{{ msg.text }}</p>
+    <p class="message-time">{{ msg.time }}</p>
+  </div>
+  <input type="text" [(ngModel)]="message" placeholder="Enter your message...">
+  <button (click)="sendMessage()">Send</button>
+  <div *ngIf="date_decision">
+    <p>{{ date_decision }}</p>
+  </div>
+  <div *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>

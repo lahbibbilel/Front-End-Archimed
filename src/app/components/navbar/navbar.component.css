@@ -1,0 +1,34 @@
+.user-image {
+  width: 26px;
+  height: 26px;
+  object-fit: cover; /* Assure que l'image conserve ses proportions tout en remplissant la boîte */
+  border-radius: 50%; /* Optionnel, pour rendre l'image circulaire */
+}
+.user-image {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.user-image:hover {
+  transform: scale(2.5); /* Increase the scale factor for more enlargement */
+}
+
+
+
+
+/* CSS pour l'élément nav-link */
+.nav-l {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* CSS pour l'état de survol */
+.nav-l:hover {
+  background-color: #ffffff; /* Changer la couleur de fond au survol si nécessaire */
+  color: #000; /* Changer la couleur du texte au survol si nécessaire */
+  text-decoration: none; /* Éviter que le texte soit souligné */
+}
+.sp
+{
+  height:10px;
+  margin-top: 9px;
+}

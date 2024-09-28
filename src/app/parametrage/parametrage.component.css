@@ -1,0 +1,63 @@
+table {
+  width: 100%;
+}
+
+.blue-icon {
+  color: #0084ff;
+}
+.select-chat-container {
+  display: flex;
+  align-items: center;
+}
+
+.chat-button {
+  margin-left: 8px; /* Adjust as needed for spacing */
+  background-color: #0084ff; /* Button background color */
+}
+
+.pink-icon {
+  color: #ffffff; /* Icon color */
+}
+/* Custom style for SweetAlert with scrollable content */
+.swal-wide {
+  max-width: 600px; /* Adjust the width as needed */
+}
+
+.scrollable-content {
+  max-height: 300px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  text-align: left;
+}
+
+.loading-dots {
+  display: inline-block;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.loading-dots span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 2px;
+  background-color: #000; /* Change to your preferred color */
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,57 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"; /* You can add global styles to this file, and also import other style files */
+@import 'material-icons/iconfont/material-icons.css';
+/*@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+.sidebar[data-color=red]:after, .off-canvas-sidebar[data-color=red]:after {
+  background: url('assets/newback.png');
+
+
+
+}
+.sidebar .logo:after, .off-canvas-sidebar .logo:after {
+display : none !important;
+}
+.logo {
+  margin-top: 30px;
+}
+.logo img{
+ /* max-width: 100%; */
+  /* border-radius: .1875rem; */
+width: 200px;
+  height: 30px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.navbar.navbar-transparent {
+  background-color: #fff !important;
+  box-shadow: none;
+  color: #fff;
+}
+.navbar a:not(.btn):not(.dropdown-item) {
+  color: #212529;
+}
+.ps__rail-y {
+  z-index: 9999 ! important;
+}
+
+.panel-header {
+
+  background: rgba(222, 222, 222, 0.3);
+  background: linear-gradient(160deg, rgba(222, 222, 222, 0.3) 0%, rgba(222, 222, 222, 0.3) 100%);
+
+}
+.sidebar[data-color=red] .nav li.active>a i, .off-canvas-sidebar[data-color=red] .nav li.active>a i {
+  color: #4747F0;
+}
+.sidebar[data-color=red] .nav li.active>a, .off-canvas-sidebar[data-color=red] .nav li.active>a {
+  color: #4747F0;
+}
+
+.sidebar .logo, .off-canvas-sidebar .logo {
+  position: relative;
+  padding: 1.5rem .7rem;
+  z-index: 4;
+  text-align: center;
+}

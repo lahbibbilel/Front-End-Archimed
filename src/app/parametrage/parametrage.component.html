@@ -1,0 +1,76 @@
+<nb-layout>
+  <nb-layout-column>
+    <div class="global">
+
+        <!-- Download CSV Button -->
+        <div class="input-group-append">
+        <button  class="btn btn-secondary" [disabled]="!showDownloadButton" aria-label="Download CSV" (click)="downloadCSV()">
+Download CSV
+        </button>
+        <!-- Upload File Button -->
+        <button  class="btn btn-primary" [disabled]="dataSource.data.length > 0" aria-label="Upload File" (click)="openSweetAlert()">
+          Upload File
+        </button>
+
+        <!-- Type Selector and Download Correspondence Button -->
+          <div class="select-chat-container">
+            <mat-form-field>
+              <mat-select [(ngModel)]="selectedType" (selectionChange)="onTypeChange()">
+                <mat-option value="Marc">Marc</mat-option>
+                <mat-option value="Unimarc 21">Unimarc 21</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="chat-button-container">
+              <button mat-mini-fab class="chat-button" *ngIf="showChatButton"
+                      (click)="downloadLLMResponse()"
+                >
+                <mat-icon class="pink-icon">chat</mat-icon>
+              </button>
+
+              <!-- Loading Dots -->
+              <div *ngIf="isLoading" class="loading-dots">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> Fields in dataflow </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          </ng-container>
+
+          <!-- Mapping Syracus Column -->
+          <ng-container matColumnDef="mappingSyracus">
+            <th mat-header-cell *matHeaderCellDef> Mapping Syracus </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-select [(ngModel)]="element.mappingSyracus" [disabled]="selectedType === 'LLM'">
+                <mat-option *ngFor="let option of getMappingOptions(element.type)" [value]="option">{{option}}</mat-option>
+              </mat-select>
+            </td>
+          </ng-container>
+
+          <!-- Subfield Column -->
+          <ng-container matColumnDef="subfield">
+            <th mat-header-cell *matHeaderCellDef> Subfield </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-select [(ngModel)]="element.subfield" [disabled]="selectedType === 'LLM'">
+                <mat-option *ngFor="let option of subfieldOptions" [value]="option">{{option}}</mat-option>
+              </mat-select>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+    </div>
+  </nb-layout-column>
+</nb-layout>
