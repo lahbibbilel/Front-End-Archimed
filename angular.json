@@ -12,11 +12,12 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist",
+            
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "allowedCommonJsDependencies": ["lodash"],
+            "allowedCommonJsDependencies": ["standardized-audio-context"],
             "assets": [
               "src/assets",
               "src/favicon.ico"
