@@ -35,5 +35,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/
+          github_token: ${{ secrets.PAT_TOKEN }} # Use your PAT secret here
+          publish_dir: ./dist/front-newV-archimed # Update this to your correct build output path
