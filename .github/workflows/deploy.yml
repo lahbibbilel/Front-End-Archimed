@@ -36,5 +36,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.PAT_TOKEN }} # Use your PAT secret here
-          publish_dir: ./dist/Front-end-Archimed
+          publish_dir: ./dist
 
