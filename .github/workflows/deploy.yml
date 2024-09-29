@@ -36,4 +36,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.PAT_TOKEN }} # Use your PAT secret here
-          publish_dir: ./dist/front-newV-archimed # Update this to your correct build output path
+          publish_dir: ./dist 
