@@ -108,7 +108,7 @@ export class ParametrageComponent implements AfterViewInit {
 
   onTypeChange() {
     this.dataSource.data.forEach(row => row.type = this.selectedType);
-    if (this.selectedType === 'Marc' || this.selectedType === 'Unimarc 21') {
+    if (this.selectedType === 'Unimarc' || this.selectedType === 'Unimarc') {
       this.displayedColumns = ['position', 'mappingSyracus', 'subfield'];
    //   this.fetchLLMData();
     } else {
@@ -117,7 +117,7 @@ export class ParametrageComponent implements AfterViewInit {
   }
 
   getMappingOptions(type: string): string[] {
-    return type === 'Unimarc 21' ? this.marcOptions : (type === 'Marc' ? this.unimarcOptions : []);
+    return type === 'Unimarc' ? this.marcOptions : (type === 'Marc' ? this.unimarcOptions : []);
   }
 
   isLoading: boolean = false;
